@@ -35,6 +35,7 @@ TEST_CASE("adding and removing elements in Magical Container") {
     CHECK_NE(*it.begin(),5);
     CHECK_EQ(*it.begin(),6);
     CHECK_EQ(++it,it.end());
+    CHECK_THROWS(++it);
 }
 TEST_CASE("Ascending iterator check"){
     ariel::MagicalContainer myContainer;
@@ -48,6 +49,7 @@ TEST_CASE("Ascending iterator check"){
     CHECK_EQ(*(++it),4);
     CHECK_EQ(*(++it),5);
     CHECK_EQ(*(++it),*it.end());
+    CHECK_THROWS(++it);
 }
 TEST_CASE("side-cross iterator check"){
     ariel::MagicalContainer myContainer;
@@ -61,6 +63,7 @@ TEST_CASE("side-cross iterator check"){
     CHECK_EQ(*(++it),3);
     CHECK_EQ(*(++it),4);
     CHECK_EQ(*(++it),*it.end());
+    CHECK_THROWS(++it);
 }
 TEST_CASE("prime iterator check"){
     ariel::MagicalContainer myContainer;
@@ -72,4 +75,5 @@ TEST_CASE("prime iterator check"){
     CHECK_EQ(*it.begin(),5);
     CHECK_EQ(*(++it),7);
     CHECK_EQ(*(++it),*it.end());
+    CHECK_THROWS(++it);
 }
