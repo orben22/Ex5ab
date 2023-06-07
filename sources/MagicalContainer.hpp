@@ -37,13 +37,12 @@ namespace ariel {
 
         size_t size();
 
-        bool isExist(int element);
-
 //Iterators Classes
 
         class AscendingIterator {
             MagicalContainer &container;
             std::vector<int>::iterator it;
+            size_t counter;
         public:
             explicit AscendingIterator(MagicalContainer &container);
 
@@ -74,7 +73,10 @@ namespace ariel {
 
         class SideCrossIterator {
             MagicalContainer &container;
-            std::vector<int>::iterator it;
+            std::vector<int>::iterator it_front;
+            std::vector<int>::iterator it_end;
+            bool flag; //true=it_front, false=it_end
+            size_t counter;
 
         public:
             explicit SideCrossIterator(MagicalContainer &container);
@@ -108,6 +110,7 @@ namespace ariel {
 
             MagicalContainer &container;
             std::vector<int*>::iterator it;
+            size_t counter;
 
         public:
             explicit PrimeIterator(MagicalContainer &container);
