@@ -3,11 +3,13 @@
 
 #include <vector>
 #include <cstddef>
+
 namespace ariel {
 
     class MagicalContainer {
     private:
         std::vector<int> my_elements;
+        std::vector<int *> my_primes;
     public:
         //constructor
         MagicalContainer() = default;
@@ -35,12 +37,13 @@ namespace ariel {
 
         size_t size();
 
+        bool isExist(int element);
+
 //Iterators Classes
 
         class AscendingIterator {
-            const MagicalContainer &container;
+            MagicalContainer &container;
             std::vector<int>::iterator it;
-
         public:
             explicit AscendingIterator(MagicalContainer &container);
 
@@ -64,13 +67,13 @@ namespace ariel {
 
             int operator*();
 
-            AscendingIterator &begin();
+            AscendingIterator begin();
 
-            AscendingIterator &end();
+            AscendingIterator end();
         };
 
         class SideCrossIterator {
-            const MagicalContainer &container;
+            MagicalContainer &container;
             std::vector<int>::iterator it;
 
         public:
@@ -96,15 +99,15 @@ namespace ariel {
 
             int operator*();
 
-            SideCrossIterator &begin();
+            SideCrossIterator begin();
 
-            SideCrossIterator &end();
+            SideCrossIterator end();
         };
 
         class PrimeIterator {
 
-            const MagicalContainer &container;
-            std::vector<int>::iterator it;
+            MagicalContainer &container;
+            std::vector<int*>::iterator it;
 
         public:
             explicit PrimeIterator(MagicalContainer &container);
@@ -129,9 +132,9 @@ namespace ariel {
 
             int operator*();
 
-            PrimeIterator &begin();
+            PrimeIterator begin();
 
-            PrimeIterator &end();
+            PrimeIterator end();
         };
 
     };
