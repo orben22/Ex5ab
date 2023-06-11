@@ -1,16 +1,25 @@
 #ifndef MAGICAL_ITERATORS_PARTA_MAGICALCONTAINER_HPP
 #define MAGICAL_ITERATORS_PARTA_MAGICALCONTAINER_HPP
 
-#include <vector>
 #include <cstddef>
+#include <set>
 
 namespace ariel {
+    struct Compare {
+        bool operator() (const int* a, const int* b) const {
+            return *a < *b;
+        }
+    };
 
     class MagicalContainer {
     private:
-        std::vector<int> my_elements;
-        std::vector<int *> my_primes;
+        std::set<int> my_elements;
+        std::set<int *, Compare> my_primes;
     public:
+        const std::set<int> &getMyElements() const;
+
+        const std::set<int *, Compare> &getMyPrimes() const;
+
         //constructor
         MagicalContainer() = default;
 
@@ -37,11 +46,15 @@ namespace ariel {
 
         size_t size();
 
+        class AscendingIterator;
+        class SideCrossIterator;
+        class PrimeIterator;
+
 //Iterators Classes
 
         class AscendingIterator {
             MagicalContainer &container;
-            std::vector<int>::iterator it;
+            std::set<int>::iterator it;
             size_t counter;
         public:
             explicit AscendingIterator(MagicalContainer &container);
@@ -61,6 +74,22 @@ namespace ariel {
             bool operator>(const AscendingIterator &other) const;
 
             bool operator<(const AscendingIterator &other) const;
+            //operators with other iterators
+            bool operator==(const SideCrossIterator &other) const;
+
+            bool operator!=(const SideCrossIterator &other) const;
+
+            bool operator>(const SideCrossIterator &other) const;
+
+            bool operator<(const SideCrossIterator &other) const;
+
+            bool operator==(const PrimeIterator &other) const;
+
+            bool operator!=(const PrimeIterator &other) const;
+
+            bool operator>(const PrimeIterator &other) const;
+
+            bool operator<(const PrimeIterator &other) const;
 
             AscendingIterator &operator++();
 
@@ -73,8 +102,8 @@ namespace ariel {
 
         class SideCrossIterator {
             MagicalContainer &container;
-            std::vector<int>::iterator it_front;
-            std::vector<int>::iterator it_end;
+            std::set<int>::iterator it_front;
+            std::set<int>::iterator it_end;
             bool flag; //true=it_front, false=it_end
             size_t counter;
 
@@ -96,6 +125,22 @@ namespace ariel {
             bool operator>(const SideCrossIterator &other) const;
 
             bool operator<(const SideCrossIterator &other) const;
+            //operators with other iterators
+            bool operator==(const AscendingIterator &other) const;
+
+            bool operator!=(const AscendingIterator &other) const;
+
+            bool operator>(const AscendingIterator &other) const;
+
+            bool operator<(const AscendingIterator &other) const;
+
+            bool operator==(const PrimeIterator &other) const;
+
+            bool operator!=(const PrimeIterator &other) const;
+
+            bool operator>(const PrimeIterator &other) const;
+
+            bool operator<(const PrimeIterator &other) const;
 
             SideCrossIterator &operator++();
 
@@ -109,7 +154,7 @@ namespace ariel {
         class PrimeIterator {
 
             MagicalContainer &container;
-            std::vector<int*>::iterator it;
+            std::set<int*>::iterator it;
             size_t counter;
 
         public:
@@ -130,6 +175,22 @@ namespace ariel {
             bool operator>(const PrimeIterator &other) const;
 
             bool operator<(const PrimeIterator &other) const;
+            //operators with other iterators
+            bool operator==(const AscendingIterator &other) const;
+
+            bool operator!=(const AscendingIterator &other) const;
+
+            bool operator>(const AscendingIterator &other) const;
+
+            bool operator<(const AscendingIterator &other) const;
+
+            bool operator==(const SideCrossIterator &other) const;
+
+            bool operator!=(const SideCrossIterator &other) const;
+
+            bool operator>(const SideCrossIterator &other) const;
+
+            bool operator<(const SideCrossIterator &other) const;
 
             PrimeIterator &operator++();
 
