@@ -28,6 +28,7 @@ namespace ariel {
             for (auto it = my_primes.begin(); it != my_primes.end();) {
                 if (**it == element) {
                     it = my_primes.erase(it);
+                    break;
                 } else {
                     ++it;
                 }
@@ -109,7 +110,7 @@ namespace ariel {
     // Returns: true if the two iterators are not equal, false otherwise
     // Realizing the operator == realization
     bool MagicalContainer::AscendingIterator::operator!=(const AscendingIterator &other) const {
-        return (!(this->counter == other.counter));
+        return (!(*this == other));
     }
     // Greater than comparison operator: operator>
     // Compares the current AscendingIterator object with another AscendingIterator object.
@@ -126,7 +127,7 @@ namespace ariel {
     // Returns: true if the current iterator is less than the other iterator, false otherwise
     // Realizing the operator > realization
     bool MagicalContainer::AscendingIterator::operator<(const AscendingIterator &other) const {
-        return other.counter > this->counter;
+        return other > *this;
     }
     // Prefix increment operator: operator++
     // Increments the iterator to point to the next element in the container.
@@ -262,7 +263,7 @@ namespace ariel {
     // Returns: true if the iterators are not equal, false otherwise
     // Realizing the operator == realization
     bool MagicalContainer::SideCrossIterator::operator!=(const SideCrossIterator &other) const {
-        return !(this->counter == other.counter);
+        return !(*this == other);
     }
 
     // Greater than comparison operator: operator>
@@ -280,7 +281,7 @@ namespace ariel {
     // Returns: true if the current iterator is less than the other iterator, false otherwise
     // Realizing the operator > realization
     bool MagicalContainer::SideCrossIterator::operator<(const SideCrossIterator &other) const {
-        return other.counter > this->counter;
+        return other > *this;
     }
 
     // Pre-increment operator: operator++
@@ -411,7 +412,7 @@ namespace ariel {
     // Returns: true if the iterators are not equal, false otherwise
     // Realizing the operator == realization
     bool MagicalContainer::PrimeIterator::operator!=(const PrimeIterator &other) const {
-        return !(this->counter == other.counter);
+        return !(*this == other);
     }
     // Greater than comparison operator: operator>
     // Compares the current PrimeIterator object with another PrimeIterator object.
@@ -427,7 +428,7 @@ namespace ariel {
     // Returns: true if the other iterator is greater than the current iterator, false otherwise
     // Realizing the operator > realization
     bool MagicalContainer::PrimeIterator::operator<(const PrimeIterator &other) const {
-        return other.counter > this->counter;
+        return other > *this;
     }
     // Pre-increment operator: operator++
     // Advances the iterator to the next position.
